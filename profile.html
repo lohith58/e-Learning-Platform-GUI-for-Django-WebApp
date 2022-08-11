@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Profile{% endblock %}
+{% block csslink %}
+<link rel="stylesheet" href="{%static 'css/contact.css'%}">
+<link rel="stylesheet" href="{%static 'css/profile.css'%}">
+{% endblock %}
+
+
+{% block body %}
+<br><br>
+<div class="container font1">
+  <div class="row">
+    <div class="col">
+      <h4>Profile Picture</h4>
+    </div>
+    <div class="col">
+     
+    </div>
+  </div>
+  <div class="row">
+    <div class="col"><br><br><br>
+     <h4>Update Profile Details</h4>
+    </div>
+    <div class="col">
+      <div class="contact-page-form">
+        <form action="/contact" method="post">
+          {% csrf_token %}
+          <div class="row">
+          <div class="col-md-12 message-input">
+            <div class="single-input-field">
+              <label for="exampleInputEmail1">Name</label>
+              <input type="text" placeholder="Your Name" id="name" name="name"/>
+            </div>
+          </div>
+          <div class="col-md-12 message-input">
+            <div class="single-input-field">
+              <label for="exampleInputEmail1">Email</label>
+              <input type="email" placeholder="E-mail" id="email" name="email" required/>
+            </div>
+          </div>
+          <div class="col-md-12 message-input">
+            <div class="single-input-field">
+              <label for="exampleInputEmail1">State</label>
+              <input type="text" placeholder="Phone Number" id="phone" name="phone"/>
+            </div>
+          </div>
+          <div class="col-md-12 message-input">
+            <div class="single-input-field">
+               <label for="exampleInputEmail1">Mobile</label>
+              <input type="text" placeholder="Subject" id="subject" name="subject"/>
+            </div>
+          </div>
+          <div class="single-input-fieldsbtn">
+            <input type="submit" value="Save"/>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col"><br><br><br>
+      <h4>Change Password</h4>
+    </div>
+    <div class="col">
+      <div class="contact-page-form">
+        <form action="/contact" method="post">
+          {% csrf_token %}
+          <div class="row">
+          <div class="col-md-12 message-input">
+            <div class="single-input-field">
+              <label for="exampleInputEmail1">Current Password</label>
+              <input type="text" placeholder="Current Password" id="name" name="name"/>
+            </div>
+          </div>
+          <div class="col-md-12 message-input">
+            <div class="single-input-field">
+              <label for="exampleInputEmail1">New Password</label>
+              <input type="email" placeholder="New Password" id="email" name="email" required/>
+            </div>
+          </div>
+          <div class="col-md-12 message-input">
+            <div class="single-input-field">
+              <label for="exampleInputEmail1">Retype new Password</label>
+              <input type="text" placeholder="Retype new Password" id="phone" name="phone"/>
+            </div>
+          </div>
+          <div class="single-input-fieldsbtn">
+            <input type="submit" value="Save"/>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<br><br>
+{% endblock %}

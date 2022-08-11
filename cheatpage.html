@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{%load static%}
+{% block title %} CheatsheetPage{% endblock title %}
+{% block body %}
+{% load humanize %}
+{% load extras %}
+<br><br>
+<div class="container font1">
+  <div class="text-center" style="background-color:black;color:white"><br>
+    <h3 class="font1"><span class="logo"><img src="{%static 'img/copy.png'%}" alt="" width="30" height="30"></span>{{cheatpage.name}}</h3>
+    <h6 class="font1">refer the content quickly and copy code snippets if necessary !</h6><br>
+  </div>
+  <p>{{cheatpage.content|safe}}</p>
+</div>
+{% endblock %}

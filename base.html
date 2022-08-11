@@ -1,0 +1,296 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+  {% block csslink %} {% endblock %}
+  <!-- fontawsome-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="{%static 'css/footer.css'%}">
+ <link rel="stylesheet" href="{%static 'css/mystyle.css'%}">
+ <link rel="stylesheet" href="{%static 'css/prism.css'%}">
+  <script src="{%static 'js/prism.js'%}"></script>
+  <script src="{%static 'js/testimonials.js'%}"></script>
+
+
+  <title>{% block title %} {% endblock %}</title>
+
+  <style>
+       {% block css %} {% endblock %}
+  </style>
+</head>
+<body>
+
+  <!--  navigation bar code starts here-->
+  <nav class="navbar navbar-expand-lg py-4 navbar-dark text-white font1 navbar-custom " style="background-color:black;color:white">
+       <a class="navbar-brand text-white" href="/">iCoder</a>
+       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+       </button>
+
+       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+         <ul class="navbar-nav mr-auto">
+           <li class="nav-item active">
+             <a class="nav-link" href="/"><i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
+           </li>
+           <li class="nav-item active">
+             <a class="nav-link" href="/about"><i class="fas fa-book"></i> Courses</a>
+           </li>
+
+           {% if user.is_authenticated %}
+           <li class="nav-item active dropdown">
+             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-book-reader"></i> ExploreTheory
+             </a>
+             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+               <a class="dropdown-item" href="/exploretheory"><i class="fas fa-align-left"></i> TheoryContent</a>
+               <a class="dropdown-item" href="/cheatsheets"><i class="fas fa-sticky-note"></i> CheatSheets</a>
+             </div>
+          </li>
+           <li class="nav-item active">
+             <a class="nav-link" href="/about"><i class="fas fa-pen-square"></i>  Quizzes</a>
+           </li>
+           {% else %}
+           <li class="nav-item active">
+             <a class="nav-link" href="/blog"><i class="fab fa-blogger-b"></i>  Blog</a>
+           </li>
+           <li class="nav-item active">
+             <a class="nav-link" href="/testimonials"><i class="far fa-comment"></i> Testimonials</a>
+           </li>
+           {% endif %}
+         </ul>
+         <form method="get" action="/blogsearch"class="form-inline my-2 my-lg-0">
+           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query" id="query">
+           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+         </form>
+
+          {% if user.is_authenticated %}
+          <ul class="navbar-nav mr-2">
+            <li class="nav-item active">
+              <a class="nav-link" href="/about"><i class="fas fa-book"></i> My courses</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/about"><i class="far fa-heart"></i></a>
+            </li>
+            <li class="nav-item active">
+             <a class="nav-link" href="/about"><i class="fas fa-shopping-cart"></i></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/notifications"><i class="far fa-bell"></i> </a>
+            </li>
+          <li class="nav-item dropdown active">
+          <a class="nav-link dropdown-toggle" href='#' id="navbarDropdown" role="button" data-toggle="dropdown"> Welcome {{request.user}}</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/logout"><i class="fas fa-book"></i> My courses</a>
+          <a class="dropdown-item" href="/logout"><i class="fas fa-shopping-cart"></i>  My cart</a>
+          <a class="dropdown-item" href="/logout"><i class="far fa-heart"></i> Wishlist</a>
+          <a class="dropdown-item" href="/notifications"><i class="fas fa-bell"></i> Notifications</a>
+          <a class="dropdown-item" href="/logout"><i class="fas fa-history"></i> Purchase history</a>
+          <a class="dropdown-item" href="/publicforum"><i class="fas fa-comments"></i> Public forum</a>
+          <a class="dropdown-item" href="/myprofile"><i class="fas fa-user-circle"></i> Profile</a>
+          <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+          </div>
+          </li>
+          </ul>
+          </div>
+          {% else %}
+          <!-- Button to  trigger Login modal -->
+           <button type="button" class="btn3 mr-2" data-toggle="modal" data-target="#loginModal">
+           Login
+           </button>
+          <!-- Button to  trigger SignUp modal -->
+          <button type="button" class="btn3 mr-2" data-toggle="modal" data-target="#signupModal">
+          SignUp
+          </button>
+          {% endif %}
+
+       </div>
+     </nav>
+    <!--nav bar code ends here-->
+<!--messages starts here-->
+    {% for message in messages  %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                <strong>Message : </strong> {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+    {% endfor %}
+<!--messages ends here-->
+
+<!-- SignUp Modal -->
+<div class="modal fade font1" id="signupModal" tabindex="-1" aria-labelledby="signupModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="signupModalTitle">SignUp Here</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action= "/signup" method='post'>
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" class="form-control" id="username" name="username" placeholder="Choose a unique username" required>
+  </div>
+  <div class="form-group">
+    <label for="fname">First Name</label>
+    <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter Your First Name" required>
+  </div>
+  <div class="form-group">
+    <label for="lname">Last Name</label>
+    <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter Your Last Name" required>
+  </div>
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
+  </div>
+  <div class="form-group">
+    <label for="pass1">Choose a password</label>
+    <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Choose Your Password" required>
+  </div>
+  <div class="form-group">
+    <label for="pass2">Confirm Password</label>
+    <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Enter your password again" required>
+  </div>
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label font1" for="exampleCheck1">I agree to the <a href="/termsofuse" style="text-decoration: none;">Terms of Use </a> and <a href="privacypolicy" style="text-decoration: none;">Privacy Policy.</a></label>
+  </div>
+        {% csrf_token %}
+        <div class="text-center">
+           <button type="submit" class="btn4">Sign Up</button><hr>
+            <p class="font1">Already have an account?<a href="#" style="text-decoration: none;"> Log In</a></p>
+        </div>
+</form>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
+{% block body %} {% endblock %}
+
+<!-- footer start -->
+   <div class="spectre">
+       <footer class="p-2" style="background-color: #000000;color:#ffffff;"><br><hr style="width:100%", size="1", color=white>
+           <div class="container">
+               <div class="clearfix m-2 linksCont"> <a class="btn btn-link font1"
+                       href="{% url 'faqs' %}" data-id="faqs" style="color: white;text-decoration: none;">FAQs</a><a
+                       class="btn btn-link" href="{% url 'about' %}" data-id="contactus"
+                       style="color: white;text-decoration: none;">About Us</a> <a class="btn btn-link font1"
+                       href="{% url 'contact' %}" data-id="refundpolicy"
+                       style="color: white;text-decoration: none;">Contact Us</a><a class="btn btn-link font1"
+                       href="{% url 'refundpolicy' %}" data-id="verifycertificate"
+                       style="color: white;text-decoration: none;">Refund Ploicy</a></div>
+               <br>
+               <div class="columns m-2 footer-btm">
+                   <div class="column col-6 col-sm-12 footer-css font1" style="font-size: .8rem;"> © 2022 Fibido</div>
+                   <div class="column col-6 col-sm-12 text-right footer-css">
+
+                     &nbsp; <a  class="text-white" target="_blank"
+                           href="#"><i class="fab fa-youtube-square fa-2x"></i></a>
+                       &nbsp; <a class="text-white" target="_blank" href="#"><i class="fab fa-twitter-square fa-2x"></i></a>
+                       &nbsp; <a   class="text-white"target="_blank"
+                           href="#"><i class="fab fa-facebook-square fa-2x"></i></a>
+                       &nbsp; <a class="text-white" class="linkedinPage" target="_blank"
+                           href="#"><i class="fab fa-linkedin fa-2x"></i></a>
+                       &nbsp; <a class="text-white" target="_blank" href="#"><i class="fab fa-instagram-square fa-2x"></i></a>
+
+                   </div>
+               </div>
+           </div>
+       </footer>
+     </div>
+
+   <!-- footer end -->
+<!-- subscribe Modal -->
+<div class="modal fade font1" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Subscribe</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action= "/login" method='post'>
+    <div class="form-group">
+      <label for="username">Email</label>
+      <input type="text" class="form-control" id="loginusername" name="loginusername" placeholder="Enter Email" required>
+    </div>
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label font1" for="exampleCheck1">I agree to the <a href="/termsofuse" style="text-decoration: none;">Terms of Use </a> and <a href="privacypolicy" style="text-decoration: none;">Privacy Policy.</a></label>
+    </div>
+      {% csrf_token %}
+
+         <div class="text-center">
+               <button type="submit" class="btn4">Submit</button>
+         </div>
+
+  </form>
+      </div>
+      <div class="modal-footer">
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Login Modal -->
+<div class="modal fade font1" id="loginModal" tabindex="-1" aria-labelledby="loginModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalTitle">Login Here</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form action= "/login" method='post'>
+  <div class="form-group">
+    <label for="username">Email</label>
+    <input type="text" class="form-control" id="loginusername" name="loginusername" placeholder="Enter Email" required>
+  </div>
+  <div class="form-group">
+    <label for="pass">Password </label>
+    <input type="password" class="form-control" id="pass" name="loginpassword" placeholder="Enter Password " required>
+  </div>
+    {% csrf_token %}
+       <a href="#" class="text-danger text-decoration-none font1">Forgot password?</a><br><br>
+       <div class="text-center">
+            <button type="submit" class="btn4">Log In</button><hr>
+            <p>or login with</p>
+            <a href="#"><img src="{%static 'img/googleicon.png'%}" alt=""></a> &nbsp; &nbsp;
+            <a href="#"><img src="{%static 'img/fbicon.png'%}" alt=""></a>&nbsp; &nbsp;
+            <a href="#"><img src="{%static 'img/linkedinicon.png'%}" alt=""></a>&nbsp; &nbsp;
+            <a href="#"><img src="{%static 'img/appleicon.png'%}" alt=""></a><br><br>
+            <p>Don't have an account ?<a href="#" style="text-decoration: none;">Sign UP</a></p><hr>
+            <p>Unable to Login? We are here <a href="#" style="text-decoration: none;">lohith58malasaniii@gmail.com</a></p>
+       </div>
+
+</form>
+      </div>
+
+       <div class="modal-footer">
+      </div>
+
+      {% block js %}
+
+      {% endblock js %}
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+
+</body>
+</html>

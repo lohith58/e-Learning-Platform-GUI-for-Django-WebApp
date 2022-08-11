@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}notifications{% endblock %}
+{% block body %}
+{% load humanize %}
+{% load extras %}
+<br><br>
+<div class="container font1">
+{% for notification in allNotifications  %}
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="/media/{{notification.thumbnail}}" width="180" height="220" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{notification.title}}</h5>
+        <p class="card-text">{{notification.content}}</p>
+        <p class="card-text"><small class="text-muted">{{notification.timeStamp| naturaltime}}</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+</div>
+<br><br>
+
+
+{% endblock %}

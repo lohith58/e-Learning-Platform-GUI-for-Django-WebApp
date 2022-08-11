@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{%load static%}
+{% block title %}Login{% endblock %}
+{% block body %}
+<!--login start-->
+<br>
+<div class="container font1">
+  <div class="row">
+    <div class="col">
+       <img src="{%static 'img/register.jpg'%}" width="500" height="500" alt="">
+       <p>Unable to Login? We are here <a href="#" style="text-decoration: none;">lohith58malasaniii@gmail.com</a></p>
+    </div>
+    <div class="col">
+      <form action= "/login" method='post'>
+  <div class="form-group">
+    <h5 class="mb-4">Log In to Your Fibido Account</h5>
+    <label for="username">Email</label>
+    <input type="text" class="form-control" id="loginusername" name="loginusername" placeholder="Enter Email" required>
+  </div>
+  <div class="form-group">
+    <label for="pass">Password </label>
+    <input type="password" class="form-control" id="pass" name="loginpassword" placeholder="Enter Password " required>
+  </div>
+    {% csrf_token %}
+       <a href="#" class="text-danger text-decoration-none font1">Forgot password?</a><br><br>
+       <div class="text-center">
+            <button type="submit" class="btn4">Log In</button><hr>
+       </div>
+ </form>
+ <div class="text-center">
+   <p>or login with</p>
+   <a href="#"><img src="{%static 'img/googleicon.png'%}" alt=""></a> &nbsp; &nbsp;
+   <a href="#"><img src="{%static 'img/fbicon.png'%}" alt=""></a>&nbsp; &nbsp;
+   <a href="#"><img src="{%static 'img/linkedinicon.png'%}" alt=""></a>&nbsp; &nbsp;
+   <a href="#"><img src="{%static 'img/appleicon.png'%}" alt=""></a><br><br>
+   <p>Don't have an account ?<a href="" style="text-decoration: none;">Sign UP</a></p><hr>
+
+ </div>
+    </div>
+  </div>
+</div>
+<!--login end-->
+
+
+{% endblock %}

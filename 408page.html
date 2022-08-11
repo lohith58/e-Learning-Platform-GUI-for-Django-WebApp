@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{%load static%}
+{% block title %}408error{% endblock %}
+{% block csslink %}
+<link rel="stylesheet" href="{%static 'css/408page.css'%}">
+{% endblock %}
+{% block body %}
+<br><br>
+<div class="container foureight font1">
+<h1 aria-label="408 Error">4<span></span>8</h1>
+<h2>Server request timed out.</h2>
+</div>
+<br><br>
+{% endblock %}
+{% block js %}
+<script type="text/javascript">
+  if (navigator.platform.match(/(Mac|iPhone|iPod|iPad)/i)) document.body.classList.add('apple-os');
+</script>
+{% endblock js %}
